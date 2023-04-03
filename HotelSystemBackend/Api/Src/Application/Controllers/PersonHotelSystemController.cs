@@ -1,19 +1,19 @@
-﻿using Api.Src.Domain.Interfaces;
-using Api.Src.Infra.Data.Models;
+﻿using Api.Src.Domain.Interfaces.Services;
+using Api.Src.Infra.Data.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Src.Application.Controllers
 {
-    [Route("api/hotelSystem")]
+    [Route("api/personHotelSystem")]
     [ApiController]
-    public class HotelSystemController : ControllerBase
+    public class PersonHotelSystemController : ControllerBase
     {
-        private readonly IHotelSystemService _hotelSystemService;
+        private readonly IPersonHotelSystemService _personHotelSystemService;
 
-        public HotelSystemController(IHotelSystemService hotelSystemService)
+        public PersonHotelSystemController(IPersonHotelSystemService personHotelSystemService)
         {
-            _hotelSystemService = hotelSystemService;
+            _personHotelSystemService = personHotelSystemService;
         }
 
         /// <summary>
@@ -21,11 +21,11 @@ namespace Api.Src.Application.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<ActionResult> GetAllGuests()
+        public async Task<ActionResult> GetAllPerson()
         {
             try
             {
-                var data = await _hotelSystemService.GetAll();
+                var data = await _personHotelSystemService.GetAll();
 
                 return Ok(data);
             }
@@ -34,20 +34,20 @@ namespace Api.Src.Application.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        
+
         /// <summary>
         /// Busca um hóspede pelo o nome
         /// </summary>
-        /// <param name="guestName"></param>
+        /// <param name="namePerson"></param>
         /// <returns></returns>
-        [HttpGet("{guestByName}")]
-        public async Task<ActionResult> GetGuestByName([FromRoute] string guestName)
+        [HttpGet("{personByName}")]
+        public async Task<ActionResult> GetPersonByName([FromRoute] string namePerson)
         {
             try
             {
-                var data = await _hotelSystemService.GetByName(guestName);
+                var data = await _personHotelSystemService.GetByName(namePerson);
 
-                return Ok(guestName);
+                return Ok(namePerson);
             }
             catch (Exception ex)
             {
@@ -59,14 +59,13 @@ namespace Api.Src.Application.Controllers
         /// Casdastra um novo hóspede e seu quarto
         /// </summary>
         /// <param name="person"></param>
-        /// <param name="suite"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult> RegisterNewGuest(Person person, Suite suite)
+        public async Task<ActionResult> RegisterNewPerson(Person person)
         {
             try
             {
-                var data = await _hotelSystemService.NewGuest(person, suite);
+                var data = await _personHotelSystemService.NewPerson(person);
 
                 return Ok(data);
             }
@@ -80,14 +79,13 @@ namespace Api.Src.Application.Controllers
         /// atualiza os dados do hóspede
         /// </summary>
         /// <param name="person"></param>
-        /// <param name="suite"></param>
         /// <returns></returns>
         [HttpPut]
-        public async Task<ActionResult> ChangeGuestRegistration(Person person, Suite suite)
+        public async Task<ActionResult> ChangePersonRegistration(Person person)
         {
             try
             {
-                return Ok(await _hotelSystemService.ChangeRegistration(person, suite));
+                return Ok(await _personHotelSystemService.ChangePerson(person));
             }
             catch (Exception ex)
             {
@@ -98,14 +96,14 @@ namespace Api.Src.Application.Controllers
         /// <summary>
         /// Deleta do sistema um hóspede
         /// </summary>
-        /// <param name="nameGuest"></param>
+        /// <param name="namePerson"></param>
         /// <returns></returns>
-        [HttpDelete("{guestByName}")]
-        public async Task<ActionResult> DeleteSystemGuest([FromForm] string nameGuest)
+        [HttpDelete("{personByName}")]
+        public async Task<ActionResult> DeleteSystemPerson([FromForm] string namePerson)
         {
             try
             {
-                return Ok(await _hotelSystemService.DeleteGuest(nameGuest));
+                return Ok(await _personHotelSystemService.DeletePerson(namePerson));
             }
             catch (Exception ex)
             {
