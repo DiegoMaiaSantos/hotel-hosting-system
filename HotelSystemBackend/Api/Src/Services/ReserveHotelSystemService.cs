@@ -2,7 +2,7 @@
 
 namespace Api.Src.Services
 {
-    public class PersonHotelSystemService : IPersonHotelSystemService
+    public class ReserveHotelSystemService : IReserveHotelSystemService
     {
     }
 }

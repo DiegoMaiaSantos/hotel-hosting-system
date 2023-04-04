@@ -1,6 +1,9 @@
-﻿namespace Api.Src.Infra.Data.Mappers
+﻿using Api.Src.Infra.Data.Entities;
+using Microsoft.EntityFrameworkCore;
+
+namespace Api.Src.Infra.Data.Mappers
 {
-    public class PersonMapper
+    public class PersonMapper : IEntityTypeConfiguration<Person>
     {
     }
 }
