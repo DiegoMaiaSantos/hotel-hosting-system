@@ -1,6 +1,8 @@
-﻿namespace Api.Src.Infra.Data.Repositories
+﻿using Api.Src.Domain.Interfaces.Repositories;
+
+namespace Api.Src.Infra.Data.Repositories
 {
-    public class PersonHotelSystemRepository
+    public class PersonHotelSystemRepository : IPersonHotelSystemRepository
     {
     }
 }
