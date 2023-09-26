@@ -1,12 +1,12 @@
 ﻿namespace Api.Src.Infra.Data.Entities
 {
-    public class Person
+    public class Person : BaseEntity
     {
-        public int GuestId { get; set; }
-        public string? Name { get; set; }
-        public string? CPF { get; set; }
-        public int? HostedSuiteId { get; set; }
-        public virtual Suite? Suite { get; set; }
-        public virtual Reserve? Reserve { get; set; }
+        public int PersonId { get; set; }
+        public string Name { get; set; }
+        public string TaxNumber { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Email { get; set; }
+        public int ReserveId { get; set; }
     }
 }
